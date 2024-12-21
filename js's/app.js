@@ -30,7 +30,7 @@ const contentArea = document.getElementById('content-area');
 // Add this to your app.js
 onAuthStateChanged(auth, (user) => {
     if (!user) {
-        window.location.href = '../temp-host/index.html';
+        window.location.href = 'https://210041258.github.io/temp-host/index.html';
     }
 });
 
@@ -60,7 +60,7 @@ async function handleLogout() {
         
         // Redirect to login page after animation
         setTimeout(() => {
-            window.location.href = 'temp-host/index.html';
+            window.location.href = 'https://210041258.github.io/temp-host/index.html';
         }, 300);
     } catch (error) {
         console.error("Error signing out:", error);
