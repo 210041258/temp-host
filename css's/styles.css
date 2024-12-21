@@ -154,7 +154,10 @@ th {
         display: none;
     }
 }
-
+.btn btn-sm btn-warning{
+  background-color: #f7dc6f;
+  width: 50px;
+}
 /* Logout Button styling */
 #logoutBtn {
     transition: all 0.3s ease;
