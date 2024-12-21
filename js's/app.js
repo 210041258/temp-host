@@ -299,7 +299,7 @@ async function extractBookDetails(text) {
     contentArea.innerHTML = `<h3>User Notifications</h3>`;
   
     // Reference to the notifications data in Firebase
-    const notificationsRef = ref(database, `inter_user/${firebaseKey}/notification`);
+    const notificationsRef = ref(database, `inter_user/${firebaseKey}/data/notification`);
   
     // Fetch notifications data from Firebase
     get(notificationsRef)
