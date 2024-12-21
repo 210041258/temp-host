@@ -24,10 +24,7 @@
     pointer-events: none; /* Prevent label from interfering with input */
 }
 
-.btn btn-sm btn-warning{
-    background-color: #f7dc6f;
-    width: 50px;
-}
+
 
 
 
