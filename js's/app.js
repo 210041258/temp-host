@@ -1,4 +1,14 @@
 
+window.addEventListener('popstate', (event) => {
+  // Load your specific URL when back navigation is detected
+  window.location.href = "https://210041258.github.io/temp-host/html%27s/dashboard.html";
+});
+
+// Add a state to prevent navigation
+history.pushState(null, '', location.href);
+
+
+
 function checkConnection() {
     if (navigator.onLine) {
         document.body.style.visibility = 'visible';
