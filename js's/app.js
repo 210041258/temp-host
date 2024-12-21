@@ -593,6 +593,9 @@ function renderBookManagement() {
         <div id="searchContainer" class="mb-3" style="display: none;">
             <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Name, or Author , or Department">
         </div>
+                 <div>
+            <button onclick="createPDF()">Download PDF</button>
+        </div>
         <div id="bookList" style="display: none;">
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -615,9 +618,7 @@ function renderBookManagement() {
                     </thead>
                     <tbody id="bookTableBody"></tbody>
                 </table>
-                    <div>
-            <button onclick="createPDF()">Download PDF</button>
-        </div>
+           
             </div>
         </div>
         <div id="historyContainer" style="display: none;">
