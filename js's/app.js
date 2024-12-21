@@ -1,3 +1,14 @@
+window.addEventListener('popstate', (event) => {
+      // Redirect to the dashboard
+      window.location.href = "https://210041258.github.io/temp-host/html%27s/dashboard.html";
+    
+  });
+  
+  // Push initial state
+  history.pushState(null, '', location.href);
+  
+
+
 
 function checkConnection() {
     if (navigator.onLine) {
