@@ -10,7 +10,6 @@ window.addEventListener('popstate', (event) => {
 history.pushState(null, '', location.href);
 
 
-
 function checkConnection() {
     if (navigator.onLine) {
         document.body.style.visibility = 'visible';
