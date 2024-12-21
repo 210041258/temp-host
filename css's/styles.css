@@ -1,5 +1,7 @@
 /* Body styling */
 body {
+  width: 1200px;
+  margin: 0 auto;
     background-color: #280063;  /* Deep purple background */
     color: white;  /* White text for good contrast */
     font-family: 'Helvetica Neue', sans-serif;  /* Smooth sans-serif font */
