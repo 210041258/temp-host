@@ -1,0 +1,61 @@
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #280063; /* Dark purple background */
+    font-family: 'Playfair Display', serif;
+        -webkit-text-size-adjust: 100%;
+}
+th {
+    text-align: -webkit-match-parent;
+}
+.card {
+    border: none; /* Remove default card border */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.card-header {
+    background-color: #6A0DAD; /* Darker purple header */
+    color: white;
+    border-bottom: none; /* Remove header border */
+    border-top-left-radius: 10px; /* Round top corners of the card */
+    border-top-right-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #6A0DAD; /* Purple button */
+    border-color: #6A0DAD; /* Purple button border */
+}
+
+.form-control:hover {
+    border-color: #6A0DAD; /* Purple border on hover */
+    box-shadow: 0 0 5px rgba(106, 13, 173, 0.5); /* Subtle purple shadow */
+}
+
+.btn-primary:hover {
+    background-color: #4b0082; /* Darker purple on hover */
+    border-color: #4b0082; /* Darker purple border */
+}
+
+#error-message {
+    display: none;
+}
+
+
+.card {
+    animation: fadeInUp 4s ease; /* Add animation to the card */
+}
+
+
+@keyframes fadeInUp { /* Define the fadeInUp animation */
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* End in normal position */
+    }
+}
