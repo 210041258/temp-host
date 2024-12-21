@@ -660,8 +660,8 @@ function renderBooks(books, tableBody) {
             <td>${book.edition}</td>
             <td><a href="${book.copy_preview}" target="_blank">Preview</a></td>
             <td>
-                <button class="btn btn-sm btn-danger" onclick="deleteBook('${book.id}')">Delete</button>
-                <button class="btn btn-sm btn-warning" onclick="handleEditBook('${book.id}')">Edit</button>
+                <button style=" width: 50px;" class="btn btn-sm btn-danger" onclick="deleteBook('${book.id}')">Delete</button>
+                <button style=" width: 50px;" class="btn btn-sm btn-warning" onclick="handleEditBook('${book.id}')">Edit</button>
             </td>
         `;
         tableBody.appendChild(row);
