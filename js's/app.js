@@ -615,6 +615,9 @@ function renderBookManagement() {
                     </thead>
                     <tbody id="bookTableBody"></tbody>
                 </table>
+                    <div>
+            <button onclick="createPDF()">Download PDF</button>
+        </div>
             </div>
         </div>
         <div id="historyContainer" style="display: none;">
@@ -1628,3 +1631,57 @@ async function handleAddBalance(event) {
 
 // Attach the renderAddBalance function to the window object
 window.renderAddBalance = renderAddBalance;
+
+// add the print feature as pdf 
+
+
+
+function createPDF() {
+    // Import jsPDF module
+    const { jsPDF } = window.jspdf;
+
+    // Initialize a jsPDF instance
+    const doc = new jsPDF();
+
+    // Get the table element
+    const table = document.getElementById('bookTable');
+    
+    // Check if the table exists
+    if (!table) {
+        alert("Table not found!");
+        return;
+    }
+
+    // Get the rows of the table
+    const rows = table.getElementsByTagName('tr');
+
+    // Define starting position for the PDF content
+    let y = 10; // Starting Y position
+    const margin = 10; // Margin from the top
+
+    // Loop through each row and add it to the PDF
+    for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let rowData = [];
+
+        // Loop through each cell in the row
+        for (let j = 0; j < cells.length; j++) {
+            rowData.push(cells[j].innerText); // Get the text content of each cell
+        }
+
+        // Add the row data to the PDF
+        doc.text(rowData.join(' '), margin, y);
+        y += 10; // Move down for the next row
+
+        // Check if we need to add a new page
+        if (y > 280) { // Adjust based on your page size
+            doc.addPage();
+            y = 10; // Reset Y position for new page
+        }
+    }
+
+    // Save the PDF
+    doc.save('table-content.pdf');
+}
+document.getElementById("downloadPdf").addEventListener("click", createPDF);
+
