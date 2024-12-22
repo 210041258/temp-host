@@ -113,7 +113,7 @@ loginForm.addEventListener('submit', async (event) => {
         const card = document.querySelector('.card');
         card.style.animation = 'fadeOut 0.9s ease forwards';
         setTimeout(() => {
-            window.location.href = "../html's/dashboard.html";
+            window.location.href = "https://210041258.github.io/temp-host/html's/dashboard.html";
            
         }, 300);
     } catch (error) {
@@ -196,7 +196,7 @@ async function validatePinAndRedirect() {
     } else {
         showError("Invalid PIN. Redirecting to preindex...");
         setTimeout(() => {
-            window.location.href = "../html's/preindex.html";
+            window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
         }, 1000);
     }
 }
@@ -246,7 +246,7 @@ function startCheckingBlockedIp() {
             
             setTimeout(() => {
                 showError("Invalid PIN. Redirecting to preindex...");
-                window.location.href = "../html's/preindex.html";
+                window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
             }, 7000);
         } else {
             console.log("IP is not blocked. Continuing checks...");

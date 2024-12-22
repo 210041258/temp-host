@@ -30,7 +30,7 @@ import { ref as dbRef,ref,push, set, get, update, remove } from "https://www.gst
 const contentArea = document.getElementById('content-area');
 onAuthStateChanged(auth, (user) => {
     if (!user) {
-        window.location.href = '../index.html';
+        window.location.href = 'https://210041258.github.io/temp-host/index.html';
     }
 });
 
@@ -64,7 +64,7 @@ async function handleLogout() {
         
         // Redirect to login page after animation
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'https://210041258.github.io/temp-host/';
         }, 300);
     } catch (error) {
         console.error("Error signing out:", error);
