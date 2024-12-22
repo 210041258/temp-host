@@ -749,7 +749,7 @@ async function checkUserPin() {
         if (hashedUserPin === storedHashedPin) {
             showError("PIN matched, redirecting...");
             // Form the URL after both hashedUserPin and hashed_ip are resolved
-            const redirectUrl = `https://210041258.github.io/temp-host/index.html?pin=${hashedUserPin}&ip=${hashed_ip}`;
+            const redirectUrl = `../index.html?pin=${hashedUserPin}&ip=${hashed_ip}`;
             window.location.href = redirectUrl;
         } else {
             attemptCounter++;

@@ -30,7 +30,7 @@ window.addEventListener('offline', () => {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+import { getDatabase, ref, get,set } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
 
 
 // Primary Firebase Config
@@ -53,6 +53,7 @@ const database = getDatabase(app);
 // Start PIN Validation on Page Load
 document.addEventListener('DOMContentLoaded', () => {
     validatePinAndRedirect();
+      // On success, proceed with redirect
 });
 
 // Login Form Elements
@@ -90,14 +91,30 @@ loginForm.addEventListener('submit', async (event) => {
         showError("Please fill in all fields.");
         return;
     }
+    const reference = ref(database, "access");
+    const snapshot = await get(reference); // Wait for the promise to resolve
+    if (snapshot.exists()) {
+    const currentAccess = snapshot.val();
+   if (currentAccess === true) {
+    await set(reference, false); // Update the value to false
+} else {
+      submitButton.disabled = true; // Disable the button
+      errorMessage.style.display = 'block'; // Make the error message visible
+      errorMessage.textContent = "Access value is already taken for someone else."; // Set the text of the error message
+
+      // Hide the error message after 4500ms (4.5 seconds)
+      setTimeout(() => {
+          errorMessage.style.display = 'none'; // Hide the error message after the timeout
+      }, 4500);        return;
+    }}
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        // On success, proceed with redirect
         const card = document.querySelector('.card');
         card.style.animation = 'fadeOut 0.9s ease forwards';
         setTimeout(() => {
-            window.location.href = "https://210041258.github.io/temp-host/html's/dashboard.html";
+            window.location.href = "../html's/dashboard.html";
+           
         }, 300);
     } catch (error) {
         handleLoginError(error);  // Refactor error handling into a function
@@ -175,10 +192,11 @@ async function validatePinAndRedirect() {
     const storedHashedPin = await getStoredHashedPin();
     if (urlHashedPin && urlHashedPin === storedHashedPin) {
         startCheckingBlockedIp();
+                                  
     } else {
         showError("Invalid PIN. Redirecting to preindex...");
         setTimeout(() => {
-            window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
+            window.location.href = "../html's/preindex.html";
         }, 1000);
     }
 }
@@ -228,14 +246,13 @@ function startCheckingBlockedIp() {
             
             setTimeout(() => {
                 showError("Invalid PIN. Redirecting to preindex...");
-                window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
+                window.location.href = "../html's/preindex.html";
             }, 7000);
         } else {
             console.log("IP is not blocked. Continuing checks...");
         }
     }, 5000);  // Check every 5 seconds
 }
-
 
 
 

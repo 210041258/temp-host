@@ -23,11 +23,6 @@
     z-index: 1;  /* Ensure label is on top of input text */
     pointer-events: none; /* Prevent label from interfering with input */
 }
-
-
-
-
-
 .form-floating > .form-control{
     padding-left: 1.6rem;
 
