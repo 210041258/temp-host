@@ -566,10 +566,18 @@ async function refreshPinBasedOnVariable() {
     
     if (snapshot.exists()) {
         const currentAccess = snapshot.val();
-        
-        if (currentAccess === true) {
-            const refreshSnapshot = await get(refreshPinRef); // Fetch the refreshPin value once
-            const refreshTrigger = refreshSnapshot.val();
+        if(currentAccess !== true && currentAccess !== false){
+            showError("Access value is wrong or unkown");
+            return;
+        }
+        if(currentAccess === true || currentAccess===false){
+            if(currentAccess === false){
+                console.log("Access value is false");
+                return;
+            }
+            
+             const refreshSnapshot = await get(refreshPinRef); // Fetch the refreshPin value once
+             const refreshTrigger = refreshSnapshot.val();
             
             if (refreshTrigger === true) {
                 const newPin = generateRandomPin();
@@ -577,8 +585,6 @@ async function refreshPinBasedOnVariable() {
                 console.log("PIN refreshed and updated in Firebase:", newPin);
                 set(refreshPinRef, false); // Reset the trigger
             }
-        } else {
-            showError("Access value is already taken for someone else.");
         }
     }
 }
@@ -783,12 +789,31 @@ async function load_before() {
     const snapshot = await get(reference); // Wait for the promise to resolve
     if (snapshot.exists()) {
     const currentAccess = snapshot.val();
-   if (currentAccess === true) {
+    if(currentAccess !== true && currentAccess !== false){
+        showError("Access value is wrong or unkown");
+        return;
+    }
+    
+    if (currentAccess === true) {
     const randomPin = generateRandomPin(4);
     submitPinToFirebase(randomPin);
     setInterval(refreshPinBasedOnVariable,5000);
-}else{showError("Access value is already taken for someone else.");}}
+    }else{
+        if(currentAccess === false){
+        console.log("Access value is false");
+        return;
+    }
+        const newPin = generateRandomPin();
+        submitPinToFirebase(newPin); // Store new PIN and its hash
+        console.log("PIN refreshed and updated in Firebase:", newPin);
+        set(refreshPinRef, false); // Reset the trigger
+        setInterval(refreshPinBasedOnVariable,5000);
+    }
+    }
+
 }
+
+
 
 load_before();
 
