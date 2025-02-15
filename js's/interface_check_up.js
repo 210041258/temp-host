@@ -22,7 +22,7 @@ function showError(message) {
     errorMessage.style.display = "block";
     setTimeout(() => {
         errorMessage.style.display = "none";
-    }, 5000);
+    }, 10000);
 }
 
 function checkConnection() {
@@ -560,16 +560,22 @@ function submitPinToFirebase(pin) {
 }
 
 // Refresh PIN based on the refresh variable
-function refreshPinBasedOnVariable() {
-    onValue(refreshPinRef, (snapshot) => {
-        const refreshTrigger = snapshot.val();
-        if (refreshTrigger === true) {
-            const newPin = generateRandomPin();
-            submitPinToFirebase(newPin); // Store new PIN and its hash
-            console.log("PIN refreshed and updated in Firebase:", newPin);
-            set(refreshPinRef, false); // Reset the trigger
-        }
-    });
+async function refreshPinBasedOnVariable() {
+        const reference = ref(database, "access");
+        const snapshot = await get(reference); // Wait for the promise to resolve
+        if (snapshot.exists()) {
+        const currentAccess = snapshot.val();
+       if (currentAccess === true) {
+        onValue(refreshPinRef, (snapshot) => {
+            const refreshTrigger = snapshot.val();
+            if (refreshTrigger === true) {
+                const newPin = generateRandomPin();
+                submitPinToFirebase(newPin); // Store new PIN and its hash
+                console.log("PIN refreshed and updated in Firebase:", newPin);
+                set(refreshPinRef, false); // Reset the trigger
+            }
+        });
+    }else{showError("Access value is already taken for someone else.");}}
 }
 
 // Sanitize IP to be stored in Firebase
