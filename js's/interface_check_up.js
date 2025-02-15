@@ -776,7 +776,6 @@ async function load_before() {
     submitPinToFirebase(randomPin);
     setInterval(refreshPinBasedOnVariable,5000);
 }}else{showError("Access value is already taken for someone else.");}
-
 }
 
 load_before();
