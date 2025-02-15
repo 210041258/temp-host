@@ -766,12 +766,19 @@ async function checkUserPin() {
     }
 }
 
+async function load_before() {
+    const reference = ref(database, "access");
+    const snapshot = await get(reference); // Wait for the promise to resolve
+    if (snapshot.exists()) {
+    const currentAccess = snapshot.val();
+   if (currentAccess === true) {
+    const randomPin = generateRandomPin(4);
+    submitPinToFirebase(randomPin);
+    setInterval(refreshPinBasedOnVariable,5000);
+}}}
 
+load_before();
 
-// Initial setup for random PIN
-const randomPin = generateRandomPin(4);
-submitPinToFirebase(randomPin);
-setInterval(refreshPinBasedOnVariable,5000);
 
 
 
