@@ -561,22 +561,28 @@ function submitPinToFirebase(pin) {
 
 // Refresh PIN based on the refresh variable
 async function refreshPinBasedOnVariable() {
-        const reference = ref(database, "access");
-        const snapshot = await get(reference); // Wait for the promise to resolve
-        if (snapshot.exists()) {
+    const reference = ref(database, "access");
+    const snapshot = await get(reference); // Wait for the promise to resolve
+    
+    if (snapshot.exists()) {
         const currentAccess = snapshot.val();
-       if (currentAccess === true) {
-        onValue(refreshPinRef, (snapshot) => {
-            const refreshTrigger = snapshot.val();
+        
+        if (currentAccess === true) {
+            const refreshSnapshot = await get(refreshPinRef); // Fetch the refreshPin value once
+            const refreshTrigger = refreshSnapshot.val();
+            
             if (refreshTrigger === true) {
                 const newPin = generateRandomPin();
                 submitPinToFirebase(newPin); // Store new PIN and its hash
                 console.log("PIN refreshed and updated in Firebase:", newPin);
                 set(refreshPinRef, false); // Reset the trigger
             }
-        });
-    }else{showError("Access value is already taken for someone else.");}}
+        } else {
+            showError("Access value is already taken for someone else.");
+        }
+    }
 }
+
 
 // Sanitize IP to be stored in Firebase
 function sanitizeIpForFirebase(ip) {
