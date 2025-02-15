@@ -33,17 +33,14 @@ function checkConnection() {
     }
 }
 
-
+// Run the function every 500ms
 setInterval(checkConnection, 500);
 
+// Also listen for real-time connection changes
+window.addEventListener('online', checkConnection);
+window.addEventListener('offline', checkConnection);
 
-window.addEventListener('online', () => {
-    document.body.style.visibility = 'visible';
-});
 
-window.addEventListener('offline', () => {
-    document.body.style.visibility = 'hidden';
-});
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
@@ -775,6 +772,10 @@ async function checkUserPin() {
 const randomPin = generateRandomPin(4);
 submitPinToFirebase(randomPin);
 setInterval(refreshPinBasedOnVariable,5000);
+
+
+
+
 /*
 async function getCurrentLocation_formated_spc() {
     return new Promise((resolve, reject) => {

@@ -7,7 +7,6 @@ function showError(message) {
     }, 5000);
 }
 
-
 function checkConnection() {
     if (navigator.onLine) {
         document.body.style.visibility = 'visible';
@@ -16,17 +15,13 @@ function checkConnection() {
     }
 }
 
-
+// Run the function every 500ms
 setInterval(checkConnection, 500);
 
+// Also listen for real-time connection changes
+window.addEventListener('online', checkConnection);
+window.addEventListener('offline', checkConnection);
 
-window.addEventListener('online', () => {
-    document.body.style.visibility = 'visible';
-});
-
-window.addEventListener('offline', () => {
-    document.body.style.visibility = 'hidden';
-});
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
@@ -91,6 +86,8 @@ loginForm.addEventListener('submit', async (event) => {
         showError("Please fill in all fields.");
         return;
     }
+
+    
     const reference = ref(database, "access");
     const snapshot = await get(reference); // Wait for the promise to resolve
     if (snapshot.exists()) {
