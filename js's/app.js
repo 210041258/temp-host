@@ -68,20 +68,17 @@ resetTimer(); // Start timer initially
 
 // ✅ Warn user before closing the page (instead of forcing logout)
 window.addEventListener("beforeunload", (event) => {
-    if (firebase.auth().currentUser) {
-        event.preventDefault();
-        event.stopPropagation();
-        return event;
-    }
+    alert("You must log out before leaving!");
+    handleLogout();
 });
 
 
 // ✅ Prevent back button navigation (without immediate logout)
 window.addEventListener("popstate", (event) => {
-    if (firebase.auth().currentUser) {
-        history.pushState(null, "", location.href);
+    
         alert("You must log out before leaving!");
-    }
+        handleLogout();
+
 });
 
 // ✅ Push initial state to prevent back navigation
