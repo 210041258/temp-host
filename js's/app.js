@@ -1406,9 +1406,10 @@ function renderAddNotificationForm() {
             </div>
 
             <button type="submit" class="btn btn-primary">Send Notification</button>
+            <button type="button" class="btn btn-secondary">Cancel</button>
         </form>
     `;
-
+    document.querySelector('.btn-secondary').addEventListener('click', renderNotification);
     document.getElementById("addNotificationForm").addEventListener("submit", handleAddNotification);
 
     // Re-attach change event listener
