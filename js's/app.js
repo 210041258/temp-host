@@ -1181,7 +1181,7 @@ window.editCoupon = async function(couponId) {
                         <input type="date" class="form-control" id="expiryDate" value="${coupon.expiryDate}" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button type="button" class="btn btn-secondary" onclick="renderCouponManagement()">Cancel</button>
+                    <button type="button" class="btn btn-secondary">Cancel</button>
                 </form>
             `;
 
@@ -1189,6 +1189,10 @@ window.editCoupon = async function(couponId) {
             document.getElementById('editCouponForm').addEventListener('submit', (event) => 
                 handleEditCoupon(event, couponId)
             );
+
+            // Add event listener for cancel button
+            document.querySelector('.btn-secondary').addEventListener('click', renderCouponManagement);
+            
         } else {
             alert('Coupon not found');
         }
@@ -1197,6 +1201,7 @@ window.editCoupon = async function(couponId) {
         alert('Error loading coupon details. Please try again.');
     }
 };
+
 
 // Also make deleteCoupon globally accessible
 window.deleteCoupon = async function(couponId) {
