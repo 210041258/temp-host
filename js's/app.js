@@ -137,7 +137,7 @@ function tracker() {
     // Create a styled input box for email
     const inputBox = document.createElement("input");
     inputBox.type = "text";
-    inputBox.placeholder = "Enter your Username...";
+    inputBox.placeholder = "Enter your Email Address...";
     inputBox.className = "styled-input";
     
     const submitButton = document.createElement("button");
@@ -147,7 +147,7 @@ function tracker() {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
       if (!email || !emailPattern.test(email)) {
-        alert("Please enter a valid Username.");
+        alert("Please enter a valid Email Address.");
         return;
       }
   
@@ -168,7 +168,7 @@ function tracker() {
           const table = document.createElement("table");
           table.innerHTML = `
             <tr>
-              <th>Username</th>
+              <th>Email Address</th>
               <th>Balance</th>
             </tr>
             <tr>
