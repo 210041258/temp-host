@@ -1,24 +1,5 @@
 
 
-function checkConnection() {
-    if (navigator.onLine) {
-        document.body.style.visibility = 'visible';
-    } else {
-        document.body.style.visibility = 'hidden';
-    }
-}
-
-
-setInterval(checkConnection, 500);
-
-
-window.addEventListener('online', () => {
-    document.body.style.visibility = 'visible';
-});
-
-window.addEventListener('offline', () => {
-    document.body.style.visibility = 'hidden';
-});
 
 import { auth, database, storage } from './firebaseConfig.js';
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
