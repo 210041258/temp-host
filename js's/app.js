@@ -137,7 +137,7 @@ function tracker() {
     // Create a styled input box for email
     const inputBox = document.createElement("input");
     inputBox.type = "text";
-    inputBox.placeholder = "Enter your Email Address (add username@iut-dhaka.edu)...";
+    inputBox.placeholder = "Enter your Email Address (add username+'@iut-dhaka.edu')...";
     inputBox.className = "styled-input";
     
     const submitButton = document.createElement("button");
