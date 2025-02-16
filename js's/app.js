@@ -214,7 +214,7 @@ function tracker() {
   async function showHistory(firebaseKey) {
     const contentArea = document.getElementById('content-area');
     contentArea.innerHTML = `<h3>User History</h3><br><button type="button" class="btn btn-secondary">Cancel</button>`;
-  
+    document.querySelector('.btn-secondary').addEventListener('click', tracker);
     // Reference to the history data in Firebase
     const historyRef = ref(database, `inter_user/${firebaseKey}/data/history`);
   
@@ -315,8 +315,8 @@ async function extractBookDetails(text) {
 
   function showNotifications(firebaseKey) {
     const contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = `<h3>User Notifications</h3>`;
-  
+    contentArea.innerHTML = `<h3>User Notifications</h3><br><button type="button" class="btn btn-secondary">Cancel</button>`;
+    document.querySelector('.btn-secondary').addEventListener('click', tracker);
     // Reference to the notifications data in Firebase
     const notificationsRef = ref(database, `inter_user/${firebaseKey}/data/notification`);
   
@@ -367,7 +367,8 @@ async function extractBookDetails(text) {
   
 function showMyOrder(firebaseKey) {
   const contentArea = document.getElementById('content-area');
-  contentArea.innerHTML = `<h3>User Orders</h3>`;
+  contentArea.innerHTML = `<h3>User Orders</h3><br><button type="button" class="btn btn-secondary">Cancel</button>`; 
+  document.querySelector('.btn-secondary').addEventListener('click', tracker);
 
   // Reference to the myorder data in Firebase
   const ordersRef = ref(database, `inter_user/${firebaseKey}/data/myorder`);
@@ -416,8 +417,8 @@ function showMyOrder(firebaseKey) {
   
 function showWishlist(firebaseKey) {
     const contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = `<h3>User Wishlist</h3>`;
-  
+    contentArea.innerHTML = `<h3>User Wishlist</h3><br><button type="button" class="btn btn-secondary">Cancel</button>`;
+    document.querySelector('.btn-secondary').addEventListener('click', tracker);
     // Reference to the wishlist data in Firebase
     const wishlistRef = ref(database, `inter_user/${firebaseKey}/data/wishlist`);
   
