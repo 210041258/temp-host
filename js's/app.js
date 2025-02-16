@@ -455,7 +455,8 @@ function showWishlist(firebaseKey) {
           contentArea.appendChild(list);
         } else {
           alert("No wishlist found for this user.");
-          contentArea.innerHTML = '<p>No wishlist data available.</p>';
+          contentArea.innerHTML = '<p>No wishlist data available.</p><br><button type="button" class="btn btn-secondary">Cancel</button>';
+          document.querySelector('.btn-secondary').addEventListener('click', tracker);
         }
       })
       .catch((error) => {
