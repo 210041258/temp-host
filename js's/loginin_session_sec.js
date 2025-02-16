@@ -1,8 +1,11 @@
 function showError(message) {
+    const submitButton = loginForm.querySelector('button');
     const errorMessage = document.getElementById("error-message");
     errorMessage.textContent = message;
     errorMessage.style.display = "block";
+    submitButton.disabled = true; // Disable the button
     setTimeout(() => {
+        submitButton.disabled = false; // Disable the button
         errorMessage.style.display = "none";
     }, 10000);
 }
