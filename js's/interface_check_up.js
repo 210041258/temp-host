@@ -25,20 +25,7 @@ function showError(message) {
     }, 10000);
 }
 
-function checkConnection() {
-    if (navigator.onLine) {
-        document.body.style.visibility = 'visible';
-    } else {
-        document.body.style.visibility = 'hidden';
-    }
-}
 
-// Run the function every 500ms
-setInterval(checkConnection, 500);
-
-// Also listen for real-time connection changes
-window.addEventListener('online', checkConnection);
-window.addEventListener('offline', checkConnection);
 
 
 
