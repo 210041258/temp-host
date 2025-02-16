@@ -66,19 +66,27 @@ document.addEventListener("mousemove", resetTimer);
 document.addEventListener("keypress", resetTimer);
 resetTimer(); // Start timer initially
 
-// ✅ Warn user before closing the page (instead of forcing logout)
-window.addEventListener("beforeunload", (event) => {
-    alert("You must log out before leaving!");
-    handleLogout();
-});
-
 
 // ✅ Prevent back button navigation (without immediate logout)
 window.addEventListener("popstate", (event) => {
     
-        alert("You must log out before leaving!");
+        alert("You must log out before leaving!,Logout Done!");
         handleLogout();
 
+});
+
+window.addEventListener('beforeunload', function (e) {
+
+    e.preventDefault();
+    
+    e.returnValue = 'You must log out before leaving!';
+
+    const confirmLeave = confirm("You must log out before leaving! Click OK to log out, or Cancel to stay on the page.");
+    if (confirmLeave) {
+        handleLogout();
+    } else {
+        e.preventDefault(); 
+    }
 });
 
 // ✅ Push initial state to prevent back navigation
