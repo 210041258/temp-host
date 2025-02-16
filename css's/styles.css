@@ -169,7 +169,7 @@ th {
 
 #logoutBtn:hover {
     background-color: #d9293b;  /* Darker red on hover */
-    transform: scale(1.05);  /* Subtle zoom effect */
+    transform: scale(1.02);  /* Subtle zoom effect */
 }
 
 /* Styling for the table */
@@ -234,7 +234,7 @@ input.form-control {
 
 #addBalanceBtn:hover {
     background-color: #218838; /* Darker green on hover */
-    transform: scale(1.05);  /* Subtle zoom effect */
+    transform: scale(1.02);  /* Subtle zoom effect */
 }
 
 /* Responsive Table Styling for smaller screens */
