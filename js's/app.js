@@ -6,6 +6,50 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 import { ref as dbRef,ref,push, set, get, update, remove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 
 
+// ✅ Warn the user before closing the page
+window.addEventListener("beforeunload", (event) => {
+    if (firebase.auth().currentUser) {
+        event.preventDefault();
+        event.returnValue = "You must log out before leaving!";
+    }
+});
+
+// ✅ Redirect user if they try to navigate away manually
+firebase.auth().onAuthStateChanged((user) => {
+    if (!user) {
+        console.log("User not logged in. Redirecting...");
+        window.location.href = "https://210041258.github.io/temp-host/index.html"; // Redirect to login page
+    }
+});
+
+// ✅ Prevent back button navigation
+window.addEventListener("popstate", (event) => {
+    if (firebase.auth().currentUser) {
+        history.pushState(null, "", location.href);
+        alert("You must log out before leaving!");
+    }
+});
+
+// Push initial state to prevent navigation
+history.pushState(null, "", location.href);
+
+// ✅ Auto-logout after 10 minutes of inactivity
+let logoutTimer;
+
+function resetTimer() {
+    clearTimeout(logoutTimer);
+    logoutTimer = setTimeout(() => {
+        firebase.auth().signOut().then(() => {
+            alert("You were logged out due to inactivity.");
+            window.location.href = "https://210041258.github.io/temp-host/index.html";
+        });
+    }, 10 * 60 * 1000); // 10 minutes
+}
+
+// Reset timer on user activity
+document.addEventListener("mousemove", resetTimer);
+document.addEventListener("keypress", resetTimer);
+resetTimer(); // Start timer initially
 
 
 const contentArea = document.getElementById('content-area');
@@ -104,7 +148,7 @@ function tracker() {
     // Create a styled input box for email
     const inputBox = document.createElement("input");
     inputBox.type = "text";
-    inputBox.placeholder = "Enter your email address...";
+    inputBox.placeholder = "Enter your Username...";
     inputBox.className = "styled-input";
     
     const submitButton = document.createElement("button");
@@ -114,7 +158,7 @@ function tracker() {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
       if (!email || !emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
+        alert("Please enter a valid Username.");
         return;
       }
   
@@ -135,7 +179,7 @@ function tracker() {
           const table = document.createElement("table");
           table.innerHTML = `
             <tr>
-              <th>Email</th>
+              <th>Username</th>
               <th>Balance</th>
             </tr>
             <tr>
