@@ -6,51 +6,6 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 import { ref as dbRef,ref,push, set, get, update, remove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 
 
-// ✅ Warn the user before closing the page
-window.addEventListener("beforeunload", (event) => {
-    if (firebase.auth().currentUser) {
-        event.preventDefault();
-        event.returnValue = "You must log out before leaving!";
-    }
-});
-
-// ✅ Redirect user if they try to navigate away manually
-firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-        console.log("User not logged in. Redirecting...");
-        window.location.href = "https://210041258.github.io/temp-host/index.html"; // Redirect to login page
-    }
-});
-
-// ✅ Prevent back button navigation
-window.addEventListener("popstate", (event) => {
-    if (firebase.auth().currentUser) {
-        history.pushState(null, "", location.href);
-        alert("You must log out before leaving!");
-    }
-});
-
-// Push initial state to prevent navigation
-history.pushState(null, "", location.href);
-
-// ✅ Auto-logout after 10 minutes of inactivity
-let logoutTimer;
-
-function resetTimer() {
-    clearTimeout(logoutTimer);
-    logoutTimer = setTimeout(() => {
-        firebase.auth().signOut().then(() => {
-            alert("You were logged out due to inactivity.");
-            window.location.href = "https://210041258.github.io/temp-host/index.html";
-        });
-    }, 10 * 60 * 1000); // 10 minutes
-}
-
-// Reset timer on user activity
-document.addEventListener("mousemove", resetTimer);
-document.addEventListener("keypress", resetTimer);
-resetTimer(); // Start timer initially
-
 
 const contentArea = document.getElementById('content-area');
 onAuthStateChanged(auth, (user) => {
@@ -96,6 +51,43 @@ async function handleLogout() {
         alert("Error signing out. Please try again.");
     }
 }
+
+let logoutTimer;
+
+function resetTimer() {
+    clearTimeout(logoutTimer);
+    logoutTimer = setTimeout(() => {
+        handleLogout();
+    }, 10 * 60 * 1000); // 10 minutes
+}
+
+// Reset timer on user activity
+document.addEventListener("mousemove", resetTimer);
+document.addEventListener("keypress", resetTimer);
+resetTimer(); // Start timer initially
+
+// ✅ Warn user before closing the page (instead of forcing logout)
+window.addEventListener("beforeunload", (event) => {
+    if (firebase.auth().currentUser) {
+        event.preventDefault();
+        event.stopPropagation();
+        return event;
+    }
+});
+
+
+// ✅ Prevent back button navigation (without immediate logout)
+window.addEventListener("popstate", (event) => {
+    if (firebase.auth().currentUser) {
+        history.pushState(null, "", location.href);
+        alert("You must log out before leaving!");
+    }
+});
+
+// ✅ Push initial state to prevent back navigation
+history.pushState(null, "", location.href);
+
+
 
 window.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
