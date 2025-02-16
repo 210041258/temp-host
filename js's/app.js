@@ -213,7 +213,7 @@ function tracker() {
 
   async function showHistory(firebaseKey) {
     const contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = `<h3>User History</h3>`;
+    contentArea.innerHTML = `<h3>User History</h3><br><button type="button" class="btn btn-secondary">Cancel</button>`;
   
     // Reference to the history data in Firebase
     const historyRef = ref(database, `inter_user/${firebaseKey}/data/history`);
