@@ -182,11 +182,11 @@ function tracker() {
                 <button onclick="showMyOrder('${firebaseKey}')">Order</button>
                 <button onclick="showWishlist('${firebaseKey}')">Wishlist</button>
                 <button onclick="createPDF_information('${firebaseKey}')">Download Profile</button>
-
+                <button type="button" class="btn btn-secondary">Cancel</button>
               </td>
             </tr>
           `;
-  
+          document.querySelector('.btn-secondary').addEventListener('click', tracker);
           contentArea.appendChild(table);
         } else {
           alert("User not found.");
@@ -208,7 +208,6 @@ function tracker() {
   window.showNotifications = showNotifications;
   window.showWishlist = showWishlist;
   window.showMyOrder = showMyOrder;
-  // Placeholder functions for actions (replace with your actual logic)
 
 
 
