@@ -1275,7 +1275,7 @@ function renderAddBalance() {
             </div>
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount to Add</label>
-                <input type="number" class="form-control" id="amount" required min="0.01" step="0.01">
+                <input type="number" class="form-control" id="amount" required min="1" max="100000" step="1">
             </div>
             <button type="submit" class="btn btn-primary">Add Balance</button>
         </form>
