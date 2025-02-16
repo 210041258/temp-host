@@ -1305,9 +1305,11 @@ function renderAddCouponForm() {
     <input type="date" class="form-control" id="expiryDate" required>
   </div>
   <button type="submit" class="btn btn-primary">Add Coupon</button>
+  <button type="button" class="btn btn-secondary">Cancel</button>
 </form>
     `;
     document.getElementById('addCouponForm').addEventListener('submit', handleAddCoupon);
+    document.querySelector('.btn-secondary').addEventListener('click', renderCouponManagement);
 }
 async function handleAddCoupon(event) {
     event.preventDefault();
