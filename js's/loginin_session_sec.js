@@ -4,7 +4,7 @@ function showError(message) {
     errorMessage.style.display = "block";
     setTimeout(() => {
         errorMessage.style.display = "none";
-    }, 5000);
+    }, 10000);
 }
 
 function checkConnection() {
@@ -194,7 +194,7 @@ async function validatePinAndRedirect() {
         showError("Invalid Access Session! , Redirecting to Pin Entering Interface ...");
         setTimeout(() => {
             window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
-        }, 1000);
+        }, 10000);
     }
 }
 
@@ -244,7 +244,7 @@ function startCheckingBlockedIp() {
             setTimeout(() => {
                 showError("Invalid Access Session! , Redirecting to Pin Entering Interface ...");
                 window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
-            }, 7000);
+            }, 10000);
         } else {
             console.log("IP is not blocked. Continuing checks...");
         }
