@@ -242,7 +242,7 @@ function startCheckingBlockedIp() {
             showError("Access blocked due to multiple failed attempts.");
             
             setTimeout(() => {
-                showError("Invalid PIN. Redirecting to preindex...");
+                showError("Invalid Access Session! , Redirecting to Pin Entering Interface ...");
                 window.location.href = "https://210041258.github.io/temp-host/html's/preindex.html";
             }, 7000);
         } else {
