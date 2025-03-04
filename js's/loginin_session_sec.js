@@ -80,26 +80,32 @@ loginForm.addEventListener('submit', async (event) => {
     
     const reference = ref(database, "access");
     const snapshot = await get(reference); // Wait for the promise to resolve
-    if (snapshot.exists()) {
-    const currentAccess = snapshot.val();
-   if (currentAccess === true) {
-    await set(reference, false); // Update the value to false
-} else {
-      submitButton.disabled = true; // Disable the button
-      errorMessage.style.display = 'block'; // Make the error message visible
-      errorMessage.textContent = "Access value is already taken for someone else."; // Set the text of the error message
 
-      // Hide the error message after 4500ms (4.5 seconds)
-      setTimeout(() => {
-          errorMessage.style.display = 'none'; // Hide the error message after the timeout
-      }, 4500);        return;
-    }}
 
     try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
+            // Signed in
+            if (snapshot.exists()) {
+                const currentAccess = snapshot.val();
+               if (currentAccess === true) {
+                await set(reference, false); // Update the value to false
+            } else {
+                  submitButton.disabled = true; // Disable the button
+                  errorMessage.style.display = 'block'; // Make the error message visible
+                  errorMessage.textContent = "Access value is already taken for someone else."; // Set the text of the error message
+            
+                  // Hide the error message after 4500ms (4.5 seconds)
+                  setTimeout(() => {
+                      errorMessage.style.display = 'none'; // Hide the error message after the timeout
+                  }, 4500);        return;
+                }}
+    }).catch((error) => {});
+        // Redirect to the dashboard after successful login
+        
         const card = document.querySelector('.card');
         card.style.animation = 'fadeOut 0.9s ease forwards';
         setTimeout(() => {
+            
             window.location.href = "https://210041258.github.io/temp-host/html's/dashboard.html";
            
         }, 300);
