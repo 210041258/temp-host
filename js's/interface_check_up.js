@@ -26,10 +26,6 @@ function showError(message) {
 }
 
 
-
-
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getDatabase, ref, set, push, get, child , onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
 

@@ -38,7 +38,6 @@ const database = getDatabase(app);
 // Start PIN Validation on Page Load
 document.addEventListener('DOMContentLoaded', () => {
     validatePinAndRedirect();
-      // On success, proceed with redirect
 });
 
 // Login Form Elements
@@ -205,7 +204,6 @@ async function isIpBlocked() {
     const userIp = await getUserIp();
     if (!userIp) return false;
 
-    // Check Firebase if this IP is blocked
     const blockedIpRef = ref(database, `blocked/details/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
     const snapshot = await get(blockedIpRef);
     return snapshot.exists();  // If the IP exists in Firebase, it is blocked
@@ -219,7 +217,6 @@ function sanitizeIpForFirebase(ip) {
 
 
 
-// Periodically check if the user's IP is blocked
 function startCheckingBlockedIp() {
     const intervalId = setInterval(async () => {
         const ipBlocked = await isIpBlocked(); // Check if IP is blocked
@@ -244,9 +241,5 @@ function startCheckingBlockedIp() {
         } else {
             console.log("IP is not blocked. Continuing checks...");
         }
-    }, 5000);  // Check every 5 seconds
+    }, 5000);  
 }
-
-
-
-// add the queue logining feature
