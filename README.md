@@ -1,5 +1,5 @@
 
-#  admin gateway (online hosting by the free stoage of the github ) : 
+#  admin gateway  : 
 
 
 ![db information](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/db.png)
